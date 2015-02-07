@@ -13,10 +13,6 @@ import javax.net.ssl.HttpsURLConnection;
 
 import android.util.Log;
 
-import com.application.trotez.util.TrotezConstants;
-import com.google.gson.Gson;
-import com.google.gson.stream.JsonReader;
-
 public class HttpGet {
 	private static final String TAG = "trotez";
 
@@ -28,14 +24,13 @@ public class HttpGet {
 	
 	private String url = null;
 	private Object getData = null;
-	private JsonReader reader = null;
-	
+
 	public HttpGet(String url , Object getData) {
 		this.url = url;
 		this.getData = getData;
 	}
 
-	public Object sendRequest(int type) {
+	/*public Object sendRequest(int type) {
 		Log.d(TAG, "Get send Request-----------------------");
 		try {
 
@@ -80,10 +75,10 @@ public class HttpGet {
 			httpcon.disconnect();
 		}
 
-		/*BaseData response = new BaseData();
+		*//*BaseData response = new BaseData();
 		response.isSuccess = true;
 		response.sysMessage = json;
-		response.hasDataForUI = true;*/
+		response.hasDataForUI = true;*//*
 		// json = new Gson().fromJson(json, String.class);
 		return null;
 	}
@@ -130,6 +125,6 @@ public class HttpGet {
 			}
 			
 			return new StringBuffer(sb);
-		}
+		}*/
 	
 }

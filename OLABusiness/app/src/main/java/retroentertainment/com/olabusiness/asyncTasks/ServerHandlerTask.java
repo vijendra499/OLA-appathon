@@ -61,7 +61,7 @@ public class ServerHandlerTask extends AsyncTask<Bundle, Void, BaseData> {
     private BaseData parseData(int code, Object responseReader) {
         BaseData data = null;
         switch (code) {
-            case HttpRequestConstant.SEND_RIDE_PURPOSE:
+            case HttpRequestConstant.BOOK_CAB:
                 data = new BaseData();
                 data.hasDataForUI = false;
                 data.isSuccess = true;
@@ -85,7 +85,7 @@ public class ServerHandlerTask extends AsyncTask<Bundle, Void, BaseData> {
         switch (request_code) {
             case -1:
                 break;
-            case HttpRequestConstant.SEND_RIDE_PURPOSE:
+            case HttpRequestConstant.BOOK_CAB:
                 errMsg = "Error !Please Try again";
                 bundle.putString(AbstractBaseActivity.RESPONSE_DATA, errMsg);
                 msg.what = AbstractBaseActivity.CODE_REQUEST_ERROR;
@@ -107,7 +107,7 @@ public class ServerHandlerTask extends AsyncTask<Bundle, Void, BaseData> {
         switch (request_code) {
             case -1:
                 break;
-            case HttpRequestConstant.SEND_RIDE_PURPOSE:
+            case HttpRequestConstant.BOOK_CAB:
                 if (result.isSuccess) {
                     bundle.putSerializable(AbstractBaseActivity.RESPONSE_DATA, result);
                     msg.what = AbstractBaseActivity.CODE_REQUEST_COMPLETE;

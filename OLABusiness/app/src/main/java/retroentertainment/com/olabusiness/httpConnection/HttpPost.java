@@ -33,7 +33,7 @@ public class HttpPost {
 	}
 
 	public Object sendRequest(int type) {
-		Log.d(TAG, "Post send Request-----------------------");
+		Log.d(TAG, "Post send Request-----------------------"+postData+"");
 		try {
 			
 			httpcon = (HttpsURLConnection) ((new URL(OlaConstant.BASE_URL
@@ -51,7 +51,7 @@ public class HttpPost {
 			httpcon.connect();
 			
 			if (postData != null) {
-				//setPostParams();
+				setPostParams();
 			}
 			
 	
@@ -83,17 +83,12 @@ public class HttpPost {
 			httpcon.disconnect();
 		}
 
-		/*BaseData response = new BaseData();
-		response.isSuccess = true;
-		response.sysMessage = json;
-		response.hasDataForUI = true;*/
-		// json = new Gson().fromJson(json, String.class);
 		return null;
 	}
 
-	/*private void setPostParams() {
+	private void setPostParams() {
 		byte[] outputBytes = null;
-		String output = new Gson().toJson(postData);
+		String output = (String) postData;
 		try {
 			outputBytes = output.getBytes("UTF-8");
 			os = new BufferedOutputStream(httpcon.getOutputStream());
@@ -107,7 +102,7 @@ public class HttpPost {
 			e.printStackTrace();
 		}
 
-	}*/
+	}
 
 	private StringBuffer readStream(InputStream is) {
 		StringBuilder sb = new StringBuilder();

@@ -2,19 +2,32 @@ package retroentertainment.com.olabusiness.httpConnection;
 
 import android.os.Bundle;
 
-import retroentertainment.com.olabusiness.requestData.SendRidePurposeKeyValues;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import retroentertainment.com.olabusiness.requestData.sendBookCabKeyValue;
 
 public class ConnectionUtil {
 
 	public Object callServer(Bundle requestData){
 		Object data = null;
 		switch (requestData.getInt(HttpRequestConstant.REQUEST_ID)) {
-		case HttpRequestConstant.SEND_RIDE_PURPOSE:
+		case HttpRequestConstant.BOOK_CAB:
 			
-			SendRidePurposeKeyValues value = new SendRidePurposeKeyValues();
-			//value.user_id = requestData.getString(HttpRequestConstant.USER_ID);
-			//value.friends_list = requestData.getString(HttpRequestConstant.FRIENDS_LIST_ID);
-			data = new HttpPost(HttpRequestConstant.SEND_RIDE_PURPOSE_URL ,value).sendRequest(HttpRequestConstant.TYPE_STRING_BUFFER);
+			sendBookCabKeyValue value = new sendBookCabKeyValue();
+			value.setUser(requestData.getString(HttpRequestConstant.USER_ID));
+            value.setSrc_lat(requestData.getString(HttpRequestConstant.SRC_LAT));
+            value.setSrc_long(requestData.getString(HttpRequestConstant.SRC_LNG));
+            value.setDest_lat(requestData.getString(HttpRequestConstant.DEST_LAT));
+            value.setSrc_long(requestData.getString(HttpRequestConstant.DEST_LNG));
+            value.setCategory(requestData.getString(HttpRequestConstant.CAT));
+
+            ObjectMapper mapper =  new ObjectMapper();
+            try {
+                data = new HttpPost(HttpRequestConstant.BOOK_RIDE,mapper.writeValueAsString(value)).sendRequest(HttpRequestConstant.TYPE_STRING_BUFFER);
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
 			break;
 		/*case HttpRequestConstant.LOGIN_CALL:
 			LoginKeyValues loginValues = new LoginKeyValues();

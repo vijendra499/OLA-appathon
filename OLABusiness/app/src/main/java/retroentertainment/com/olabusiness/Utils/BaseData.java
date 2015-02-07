@@ -2,8 +2,6 @@ package retroentertainment.com.olabusiness.Utils;
 
 import java.io.Serializable;
 
-import retroentertainment.com.olabusiness.responseHelper.SendRidePurposeResponse;
-
 /**
  * This class is used to store the sever response data.
  * 

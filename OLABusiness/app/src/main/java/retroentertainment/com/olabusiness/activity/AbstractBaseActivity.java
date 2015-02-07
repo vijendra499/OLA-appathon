@@ -6,9 +6,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Messenger;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import retroentertainment.com.olabusiness.Utils.BaseData;
+import retroentertainment.com.olabusiness.asyncTasks.ServerHandlerTask;
 import retroentertainment.com.olabusiness.httpConnection.HttpListener;
+import retroentertainment.com.olabusiness.httpConnection.HttpRequestConstant;
 
 /**
  * This activity is used for, checking availability of the network. Showing
@@ -21,7 +25,7 @@ import retroentertainment.com.olabusiness.httpConnection.HttpListener;
  * is called.
  * 
  */
-public abstract class AbstractBaseActivity extends Activity implements
+public abstract class AbstractBaseActivity extends FragmentActivity implements
         HttpListener {
 
 	// constants used as messaging tags
@@ -33,7 +37,6 @@ public abstract class AbstractBaseActivity extends Activity implements
 	
 	public final static String MESSENGER = "messenger";
 	public static final String RESPONSE_DATA = "response";
-	private static final String TAG = TrotezConstants.LogTag;
 
 	/**
 	 * ProgressDialog Object.AbstractBaseActivity.this
@@ -55,7 +58,6 @@ public abstract class AbstractBaseActivity extends Activity implements
 	 * @param requestData
 	 */
 	protected void onExecute(final Bundle requestData) {
-		Log.d(TAG, "called onExecute-------------------");
 		final Messenger messenger = new Messenger(mRequestCallbackHandler);
 		requestData.putParcelable(MESSENGER, messenger);
 		//new ServerHandlerTask().execute(requestData);
@@ -102,7 +104,6 @@ public abstract class AbstractBaseActivity extends Activity implements
 
 		@Override
 		public void handleMessage(final Message msg) {
-			Log.d(TAG, "inside handle message--------------");
 			int requestId = -1;
 			final Bundle extras = msg.getData();
 			if (extras != null) {
@@ -130,7 +131,6 @@ public abstract class AbstractBaseActivity extends Activity implements
 				break;
 
 			case CODE_REQUEST_COMPLETE:
-				Log.d(TAG, "Inside Request complete-----------------");
 				final BaseData data = (BaseData) extras
 						.getSerializable(RESPONSE_DATA);
 				onRequestComplete(requestId, data);

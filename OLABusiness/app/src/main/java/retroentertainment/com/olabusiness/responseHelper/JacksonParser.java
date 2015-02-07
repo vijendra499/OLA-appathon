@@ -1,12 +1,10 @@
 package retroentertainment.com.olabusiness.responseHelper;
 
-import com.fasterxml.jackson.core.JsonFactory;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.Deserializers;
 
 import java.io.IOException;
 
-import retroentertainment.com.olabusiness.Utils.BaseData;
 import retroentertainment.com.olabusiness.httpConnection.HttpRequestConstant;
 
 /**
@@ -21,12 +19,14 @@ public class JacksonParser<T> {
 
     public T parse(int requestCode) {
 
+
         ObjectMapper mapper = new ObjectMapper();
+
         T response;
         try {
             switch (requestCode){
-                case HttpRequestConstant.SEND_RIDE_PURPOSE:
-                     response= (T) mapper.readValue((byte[]) reponse,SendRidePurposeResponse.class);
+                case HttpRequestConstant.BOOK_CAB:
+                     response= (T) mapper.readValue((byte[]) reponse,BookRide.class);
                     break;
                 case HttpRequestConstant.GET_COUPONS:
                      response = (T) mapper.readValue((byte[]) reponse,Coupons.class);

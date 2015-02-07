@@ -5,5 +5,5 @@ package retroentertainment.com.olabusiness.Utils;
  */
 public class OlaConstant {
 
-    public static final String BASE_URL = "";
+    public static final String BASE_URL = " http://triplea.in/ola";
 }

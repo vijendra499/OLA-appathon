@@ -1,9 +1,9 @@
 package retroentertainment.com.olabusiness.asyncTasks;
 
-import com.application.trotez.data.BaseData;
 
+import retroentertainment.com.olabusiness.Utils.BaseData;
 
 public interface UiUpdateable<T> {
 
-	void updateUi(BaseData<T> data);
+	void updateUi(BaseData data);
 }

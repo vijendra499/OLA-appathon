@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--<string name="app_name">OlaBussiness</string>-->
+    <string name="spinner_title">Choose your purpose of ride</string>
+
+    <string-array name="ride_purpose_items">
+        <item>Not intereted></item>
+        <item>Restaurents</item>
+        <item>Entertainment</item>
+        <item>Shopping</item>
+        <item>Airport Deals</item>
+    </string-array>
+
+</resources>
