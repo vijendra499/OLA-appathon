@@ -2,14 +2,15 @@ package retroentertainment.com.olabusiness.Utils;
 
 import java.io.Serializable;
 
+import retroentertainment.com.olabusiness.responseHelper.SendRidePurposeResponse;
+
 /**
  * This class is used to store the sever response data.
  * 
  */
-public class BaseData<T> implements Serializable {
+public class BaseData implements Serializable {
 	private static final String TAG = BaseData.class.getSimpleName();
 
-    private T responseData;
 	/**
 	 * true, if data is fetched successful
 	 * 
@@ -25,7 +26,8 @@ public class BaseData<T> implements Serializable {
 	 * 
 	 */
 	public boolean hasDataForUI;
-	
+
+    public String responseData;
 
 	/**
 	 * true, if data available for UI
@@ -33,11 +35,4 @@ public class BaseData<T> implements Serializable {
 	 */
 	public int request_code;
 
-    public T getResponseData() {
-        return responseData;
-    }
-
-    public void setResponseData(T responseData) {
-        this.responseData = responseData;
-    }
 }

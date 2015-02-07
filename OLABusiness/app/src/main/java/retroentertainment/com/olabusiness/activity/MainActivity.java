@@ -7,6 +7,7 @@ import android.view.MenuItem;
 import retroentertainment.com.olabusiness.R;
 import retroentertainment.com.olabusiness.Utils.BaseData;
 import retroentertainment.com.olabusiness.responseHelper.JacksonParser;
+import retroentertainment.com.olabusiness.responseHelper.SendRidePurposeResponse;
 
 
 public class MainActivity extends AbstractBaseActivity {
@@ -42,7 +43,8 @@ public class MainActivity extends AbstractBaseActivity {
 
     @Override
     public void onRequestComplete(int request_id, BaseData baseData) {
-            JacksonParser res = (JacksonParser) baseData.getData();
+        //use this code now 
+        SendRidePurposeResponse res = new JacksonParser<SendRidePurposeResponse>(baseData.responseData).parse(request_id);
     }
 
     @Override

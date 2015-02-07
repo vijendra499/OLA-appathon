@@ -12,37 +12,38 @@ import retroentertainment.com.olabusiness.Utils.BaseData;
 import retroentertainment.com.olabusiness.activity.AbstractBaseActivity;
 import retroentertainment.com.olabusiness.httpConnection.ConnectionUtil;
 import retroentertainment.com.olabusiness.httpConnection.HttpRequestConstant;
-import retroentertainment.com.olabusiness.responseHelper.JacksonParser;
 
 
 public class ServerHandlerTask extends AsyncTask<Bundle, Void, BaseData> {
 
     private static final String TAG = ServerHandlerTask.class.getSimpleName();
     private Messenger mRequestMessenger = null;
-	private int request_code = -1;
-	private Context context = null;
-	public ServerHandlerTask(Context con){
-		this.context = con;
-	}
-	@Override
-	protected void onPreExecute() {
-		super.onPreExecute();
-	}
+    private int request_code = -1;
+    private Context context = null;
 
-	@Override
-	protected void onPostExecute(BaseData result) {
-		super.onPostExecute(result);
-		
-		Log.d(TAG, "OnPost EXE :"+result);
-		if (result != null) {
-			successCallback(result);
-		}else{
-			errorCallBack();
-		}
-	}
+    public ServerHandlerTask(Context con) {
+        this.context = con;
+    }
 
-	@Override
-	protected BaseData doInBackground(Bundle... params) {
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
+    @Override
+    protected void onPostExecute(BaseData result) {
+        super.onPostExecute(result);
+
+        Log.d(TAG, "OnPost EXE :" + result);
+        if (result != null) {
+            successCallback(result);
+        } else {
+            errorCallBack();
+        }
+    }
+
+    @Override
+    protected BaseData doInBackground(Bundle... params) {
         if (params[0] != null) {
             Bundle bundle = params[0];
             request_code = bundle.getInt(HttpRequestConstant.REQUEST_ID);
@@ -57,13 +58,18 @@ public class ServerHandlerTask extends AsyncTask<Bundle, Void, BaseData> {
         return null;
     }
 
-    private BaseData parseData(int code, Object responseReader){
+    private BaseData parseData(int code, Object responseReader) {
         BaseData data = null;
         switch (code) {
             case HttpRequestConstant.SEND_RIDE_PURPOSE:
-                data = new JacksonParser(responseReader).parse(code);
+                data = new BaseData();
+                data.hasDataForUI = false;
+                data.isSuccess = true;
+                data.responseData = (String) responseReader;
+                data.request_code = request_code;
                 break;
-
+            case HttpRequestConstant.GET_COUPONS:
+                break;
             default:
                 break;
         }
@@ -71,56 +77,56 @@ public class ServerHandlerTask extends AsyncTask<Bundle, Void, BaseData> {
     }
 
 
-	private void errorCallBack() {
-		Message msg = new Message();
-		Bundle bundle = new Bundle();
-		String errMsg = null;
-		bundle.putInt(HttpRequestConstant.REQUEST_ID, request_code);
-		switch (request_code) {
-		case -1:
-			break;
-		case HttpRequestConstant.SEND_RIDE_PURPOSE:
-			errMsg = "Sharing failed";
-			bundle.putString(AbstractBaseActivity.RESPONSE_DATA, errMsg);
-			msg.what = AbstractBaseActivity.CODE_REQUEST_ERROR;
-			msg.setData(bundle);
-			break;
-		default:
-			return;
-		}
-		try {
-			mRequestMessenger.send(msg);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
+    private void errorCallBack() {
+        Message msg = new Message();
+        Bundle bundle = new Bundle();
+        String errMsg = null;
+        bundle.putInt(HttpRequestConstant.REQUEST_ID, request_code);
+        switch (request_code) {
+            case -1:
+                break;
+            case HttpRequestConstant.SEND_RIDE_PURPOSE:
+                errMsg = "Error !Please Try again";
+                bundle.putString(AbstractBaseActivity.RESPONSE_DATA, errMsg);
+                msg.what = AbstractBaseActivity.CODE_REQUEST_ERROR;
+                msg.setData(bundle);
+                break;
+            default:
+                return;
+        }
+        try {
+            mRequestMessenger.send(msg);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
-	private void successCallback(BaseData result) {
-		Message msg = new Message();
-		Bundle bundle = new Bundle();
-		switch (result.request_code) {
-		case -1:
-			break;
-		case HttpRequestConstant.SEND_RIDE_PURPOSE:
-			
-			if (result.isSuccess) {
-				bundle.putSerializable(AbstractBaseActivity.RESPONSE_DATA, result);
-				msg.what = AbstractBaseActivity.CODE_REQUEST_COMPLETE;
-				msg.setData(bundle);
-			}else{
-				msg.what = AbstractBaseActivity.CODE_REQUEST_ERROR;
-			}
-			break;
-		default:
-			Log.d(TAG, "This should not happen ");
-			return;
-		}
-		try {
-			mRequestMessenger.send(msg);
-		} catch (RemoteException e) {
-			e.printStackTrace();
-		}
-	}
+    private void successCallback(BaseData result) {
+        Message msg = new Message();
+        Bundle bundle = new Bundle();
+        switch (request_code) {
+            case -1:
+                break;
+            case HttpRequestConstant.SEND_RIDE_PURPOSE:
+                if (result.isSuccess) {
+                    bundle.putSerializable(AbstractBaseActivity.RESPONSE_DATA, result);
+                    msg.what = AbstractBaseActivity.CODE_REQUEST_COMPLETE;
+                    msg.setData(bundle);
+                } else {
+                    msg.what = AbstractBaseActivity.CODE_REQUEST_ERROR;
+                    msg.setData(bundle);
+                }
+                break;
+            default:
+                Log.d(TAG, "This should not happen ");
+                return;
+        }
+        try {
+            mRequestMessenger.send(msg);
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 
