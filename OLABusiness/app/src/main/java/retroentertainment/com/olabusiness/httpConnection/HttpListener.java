@@ -1,7 +1,7 @@
 package retroentertainment.com.olabusiness.httpConnection;
 
-import com.application.trotez.data.BaseData;
 
+import retroentertainment.com.olabusiness.Utils.BaseData;
 
 /**
  * Listener used in handling the HTTP request and responses. All the Method will
@@ -14,7 +14,6 @@ public interface HttpListener {
 	 * Called when request execution is completed successfully.
 	 * 
 	 * @param request_id
-	 * @param data
 	 */
 	void onRequestComplete(int request_id, BaseData baseData);
 

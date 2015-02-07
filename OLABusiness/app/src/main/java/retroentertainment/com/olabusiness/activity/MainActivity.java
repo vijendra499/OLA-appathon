@@ -1,14 +1,15 @@
 package retroentertainment.com.olabusiness.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import retroentertainment.com.olabusiness.R;
+import retroentertainment.com.olabusiness.Utils.BaseData;
+import retroentertainment.com.olabusiness.responseHelper.JacksonParser;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends AbstractBaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,5 +38,20 @@ public class MainActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestComplete(int request_id, BaseData baseData) {
+            JacksonParser res = (JacksonParser) baseData.getData();
+    }
+
+    @Override
+    public void onCancel(int request_id) {
+
+    }
+
+    @Override
+    public void onError(int request_id, String errorMessage) {
+
     }
 }

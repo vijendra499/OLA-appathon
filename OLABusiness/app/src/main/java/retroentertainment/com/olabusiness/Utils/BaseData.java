@@ -8,20 +8,8 @@ import java.io.Serializable;
  */
 public class BaseData<T> implements Serializable {
 	private static final String TAG = BaseData.class.getSimpleName();
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	
-	/*
-	 *for temporary purpose for Past trips 
-	 * 
-	 */
-//	public ArrayList<PastTripData> pastTrips = new ArrayList<PastTripData>();
-	/***
-	 * for storing the profile information
-	 */
-//	public ProfileData profileData = new ProfileData();
+
+    private T responseData;
 	/**
 	 * true, if data is fetched successful
 	 * 
@@ -32,11 +20,6 @@ public class BaseData<T> implements Serializable {
 	 */
 	public String errorMessage;
 
-	/**
-	 * holds the server system message.
-	 */
-	public String sysMessage;
-	
 	/**
 	 * true, if data available for UI
 	 * 
@@ -50,4 +33,11 @@ public class BaseData<T> implements Serializable {
 	 */
 	public int request_code;
 
+    public T getResponseData() {
+        return responseData;
+    }
+
+    public void setResponseData(T responseData) {
+        this.responseData = responseData;
+    }
 }
