@@ -1,9 +1,11 @@
-package retroentertainment.com.olabusiness;
+package retroentertainment.com.olabusiness.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import retroentertainment.com.olabusiness.R;
 
 
 public class MainActivity extends Activity {
