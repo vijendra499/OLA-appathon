@@ -29,13 +29,11 @@ public class ConnectionUtil {
                 e.printStackTrace();
             }
 			break;
-		/*case HttpRequestConstant.LOGIN_CALL:
-			LoginKeyValues loginValues = new LoginKeyValues();
-			loginValues.email = requestData.getString(HttpRequestConstant.LOGIN_UID);
-			loginValues.password = requestData.getString(HttpRequestConstant.PASSWORD);
-			data = new HttpPost(HttpRequestConstant.LOGIN_URL, loginValues).sendRequest(HttpRequestConstant.TYPE_STRING_BUFFER);
+		case HttpRequestConstant.LIST_OFFERS:
+
+			data = new HttpGet(HttpRequestConstant.LIST_OFFERS_URL, null).sendRequest(HttpRequestConstant.TYPE_STRING_BUFFER);
 			break;
-		case HttpRequestConstant.FB_LOGIN_CALL :
+		/*case HttpRequestConstant.FB_LOGIN_CALL :
 			FBLoginKeyValues fbvalues = new FBLoginKeyValues();
 			fbvalues.fb_accesstoken = requestData.getString(HttpRequestConstant.FB_TOKEN);
 			data = new HttpPost(HttpRequestConstant.FB_URL, fbvalues).sendRequest(HttpRequestConstant.TYPE_STRING_BUFFER);

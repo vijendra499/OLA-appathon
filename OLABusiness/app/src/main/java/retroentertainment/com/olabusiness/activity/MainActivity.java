@@ -1,8 +1,11 @@
 package retroentertainment.com.olabusiness.activity;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -60,7 +63,7 @@ public class MainActivity extends AbstractBaseActivity implements OnMapReadyCall
     }
 
 
-   /* @Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -76,11 +79,16 @@ public class MainActivity extends AbstractBaseActivity implements OnMapReadyCall
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            startOlaCouponsActivity();
         }
 
         return super.onOptionsItemSelected(item);
-    }*/
+    }
+
+    private void startOlaCouponsActivity() {
+        Intent intent = new Intent(MainActivity.this,OlaCouponsActivity.class);
+        startActivity(intent);
+    }
 
     @Override
     public void onRequestComplete(int request_id, BaseData baseData) {

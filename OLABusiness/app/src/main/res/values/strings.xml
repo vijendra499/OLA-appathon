@@ -3,7 +3,7 @@
 
     <string name="app_name">OLABusiness</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="ola_coupons">OLA coupons</string>
     <string name="coupon_text_disclaimer">Intereted in Deals and offers near your destinations?You can choose your purpose of ride and avail the coupons once you have started your ride.</string>
 
 </resources>

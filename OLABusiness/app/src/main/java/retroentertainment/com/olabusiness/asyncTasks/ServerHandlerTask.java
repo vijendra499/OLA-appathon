@@ -68,7 +68,12 @@ public class ServerHandlerTask extends AsyncTask<Bundle, Void, BaseData> {
                 data.responseData = ( String )responseReader.toString();
                 data.request_code = request_code;
                 break;
-            case HttpRequestConstant.GET_COUPONS:
+            case HttpRequestConstant.LIST_OFFERS:
+                data = new BaseData();
+                data.hasDataForUI = false;
+                data.isSuccess = true;
+                data.responseData = ( String )responseReader.toString();
+                data.request_code = request_code;
                 break;
             default:
                 break;
@@ -108,6 +113,16 @@ public class ServerHandlerTask extends AsyncTask<Bundle, Void, BaseData> {
             case -1:
                 break;
             case HttpRequestConstant.BOOK_CAB:
+                if (result.isSuccess) {
+                    bundle.putSerializable(AbstractBaseActivity.RESPONSE_DATA, result);
+                    msg.what = AbstractBaseActivity.CODE_REQUEST_COMPLETE;
+                    msg.setData(bundle);
+                } else {
+                    msg.what = AbstractBaseActivity.CODE_REQUEST_ERROR;
+                    msg.setData(bundle);
+                }
+                break;
+            case HttpRequestConstant.LIST_OFFERS:
                 if (result.isSuccess) {
                     bundle.putSerializable(AbstractBaseActivity.RESPONSE_DATA, result);
                     msg.what = AbstractBaseActivity.CODE_REQUEST_COMPLETE;

@@ -28,7 +28,7 @@ public class JacksonParser<T> {
                      responseObject= (T) mapper.readValue((String)reponse,BookRide.class);
                     break;
                 case HttpRequestConstant.GET_COUPONS:
-                     responseObject = (T) mapper.readValue((String) reponse,Coupons.class);
+                     responseObject = (T) mapper.readValue((String) reponse,CouponsListResponse.class);
                     break;
 
             }

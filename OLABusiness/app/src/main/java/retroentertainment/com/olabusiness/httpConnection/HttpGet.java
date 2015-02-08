@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -18,7 +19,7 @@ import retroentertainment.com.olabusiness.Utils.OlaConstant;
 public class HttpGet {
 	private static final String TAG = "trotez";
 
-	private HttpsURLConnection httpcon;
+	private HttpURLConnection httpcon;
 	private OutputStream os;
 	private InputStream in;
 
@@ -36,13 +37,14 @@ public class HttpGet {
 		Log.d(TAG, "Get send Request-----------------------");
 		try {
 
-			httpcon = (HttpsURLConnection) ((new URL(OlaConstant.BASE_URL
+			httpcon = (HttpURLConnection) ((new URL(OlaConstant.BASE_URL
 					+ url).openConnection()));
 			Log.d(TAG, "inside httpget sendrequest. url - " + OlaConstant.BASE_URL + url);
-			//httpcon.setDoOutput(true);
+			httpcon.setDoOutput(true);
 			/*HttpsURLConnection
 			.setDefaultHostnameVerifier(new MyHostnameVerifier());*/
 			httpcon.setRequestProperty("Content-Type", "application/json");
+            httpcon.setRequestProperty("Accept-Charset", "UTF-8");
 			httpcon.setRequestMethod("GET");
 			
 			httpcon.connect();

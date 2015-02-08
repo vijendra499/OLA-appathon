@@ -10,9 +10,11 @@ public class HttpRequestConstant {
     //Request type
     public static final int BOOK_CAB = 101;
     public static final int GET_COUPONS = 102;
+    public static final int LIST_OFFERS = 103;
 
     //Urls to be hit
     public static final String BOOK_RIDE = "/booking";
+    public static final String LIST_OFFERS_URL = "/offer/";
 
     // for what will be returned from server
     public static final int TYPE_STRING_BUFFER = 0;
@@ -24,4 +26,5 @@ public class HttpRequestConstant {
     public static final String DEST_LAT = "dest_lat";
     public static final String DEST_LNG = "dest_lng";
     public static final String CAT = "cat";
+
 }
