@@ -13,6 +13,8 @@ import javax.net.ssl.HttpsURLConnection;
 
 import android.util.Log;
 
+import retroentertainment.com.olabusiness.Utils.OlaConstant;
+
 public class HttpGet {
 	private static final String TAG = "trotez";
 
@@ -30,16 +32,16 @@ public class HttpGet {
 		this.getData = getData;
 	}
 
-	/*public Object sendRequest(int type) {
+	public Object sendRequest(int type) {
 		Log.d(TAG, "Get send Request-----------------------");
 		try {
 
-			httpcon = (HttpsURLConnection) ((new URL(TrotezConstants.BASE_URL
+			httpcon = (HttpsURLConnection) ((new URL(OlaConstant.BASE_URL
 					+ url).openConnection()));
-			Log.d(TAG, "inside httpget sendrequest. url - " + TrotezConstants.BASE_URL + url);
+			Log.d(TAG, "inside httpget sendrequest. url - " + OlaConstant.BASE_URL + url);
 			//httpcon.setDoOutput(true);
-			HttpsURLConnection
-			.setDefaultHostnameVerifier(new MyHostnameVerifier());
+			/*HttpsURLConnection
+			.setDefaultHostnameVerifier(new MyHostnameVerifier());*/
 			httpcon.setRequestProperty("Content-Type", "application/json");
 			httpcon.setRequestMethod("GET");
 			
@@ -51,13 +53,13 @@ public class HttpGet {
 			}
 			in = httpcon.getInputStream();
 			switch (type) {
-			case HttpRequestConstant.TYPE_BYTE:
+			/*case HttpRequestConstant.TYPE_BYTE:
 				return null;
 			case HttpRequestConstant.TYPE_STREAM:
 				return null;
 			case HttpRequestConstant.TYPE_READER:
 				reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-				return reader;
+				return reader;*/
 			case HttpRequestConstant.TYPE_STRING_BUFFER:
 				json = readStream(in);
 				Log.d("123", "Login response json " + json);
@@ -75,17 +77,12 @@ public class HttpGet {
 			httpcon.disconnect();
 		}
 
-		*//*BaseData response = new BaseData();
-		response.isSuccess = true;
-		response.sysMessage = json;
-		response.hasDataForUI = true;*//*
-		// json = new Gson().fromJson(json, String.class);
 		return null;
 	}
 
 	private void setGetParams() {
 		byte[] outputBytes = null;
-		String output = new Gson().toJson(getData);
+		String output = (String) getData;
 		try {
 			outputBytes = output.getBytes("UTF-8");
 			os = new BufferedOutputStream(httpcon.getOutputStream());
@@ -125,6 +122,6 @@ public class HttpGet {
 			}
 			
 			return new StringBuffer(sb);
-		}*/
+		}
 	
 }

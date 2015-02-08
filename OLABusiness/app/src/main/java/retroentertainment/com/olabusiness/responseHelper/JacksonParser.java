@@ -18,18 +18,17 @@ public class JacksonParser<T> {
     }
 
     public T parse(int requestCode) {
-
+        T responseObject = null;
 
         ObjectMapper mapper = new ObjectMapper();
 
-        T response;
         try {
             switch (requestCode){
                 case HttpRequestConstant.BOOK_CAB:
-                     response= (T) mapper.readValue((byte[]) reponse,BookRide.class);
+                     responseObject= (T) mapper.readValue((String)reponse,BookRide.class);
                     break;
                 case HttpRequestConstant.GET_COUPONS:
-                     response = (T) mapper.readValue((byte[]) reponse,Coupons.class);
+                     responseObject = (T) mapper.readValue((String) reponse,Coupons.class);
                     break;
 
             }
@@ -37,6 +36,7 @@ public class JacksonParser<T> {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return (T) reponse;
+        return  responseObject;
+
     }
 }

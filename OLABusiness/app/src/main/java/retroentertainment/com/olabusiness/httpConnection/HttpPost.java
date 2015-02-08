@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
@@ -16,7 +17,7 @@ import android.util.Log;
 import retroentertainment.com.olabusiness.Utils.OlaConstant;
 
 public class HttpPost {
-	private HttpsURLConnection httpcon;
+	private HttpURLConnection httpcon;
 	private OutputStream os;
 	private InputStream in;
 
@@ -33,28 +34,25 @@ public class HttpPost {
 	}
 
 	public Object sendRequest(int type) {
-		Log.d(TAG, "Post send Request-----------------------"+postData+"");
+		Log.d(TAG, "Post send Request-----------------------"+url+"");
 		try {
-			
-			httpcon = (HttpsURLConnection) ((new URL(OlaConstant.BASE_URL
-					+ url).openConnection()));
+			httpcon = (HttpURLConnection) ((new URL(OlaConstant.BASE_URL
+					+ url+"/").openConnection()));
 			Log.d(TAG, "inside httppost sendrequest. url - " + OlaConstant.BASE_URL + url);
 			/*HttpsURLConnection
 			.setDefaultHostnameVerifier(new MyHostnameVerifier());*/
 			httpcon.setDoOutput(true);
 			httpcon.setRequestProperty("Content-Type", "application/json");
 			httpcon.setRequestProperty("Accept", "application/json");
+            httpcon.setRequestProperty("Accept-Charset", "UTF-8");
 			httpcon.setRequestMethod("POST");
-			
-		
 
-			httpcon.connect();
-			
-			if (postData != null) {
-				setPostParams();
-			}
-			
-	
+
+            if (postData != null) {
+                setPostParams();
+            }
+            httpcon.connect();
+            Log.d("HttpPost",""+httpcon.getResponseCode());
 			in = httpcon.getInputStream();
 			switch (type) {
 			/*case HttpRequestConstant.TYPE_BYTE:

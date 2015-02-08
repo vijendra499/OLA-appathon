@@ -65,7 +65,7 @@ public class ServerHandlerTask extends AsyncTask<Bundle, Void, BaseData> {
                 data = new BaseData();
                 data.hasDataForUI = false;
                 data.isSuccess = true;
-                data.responseData = (String) responseReader;
+                data.responseData = ( String )responseReader.toString();
                 data.request_code = request_code;
                 break;
             case HttpRequestConstant.GET_COUPONS:

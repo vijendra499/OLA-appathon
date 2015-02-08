@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,9 +73,9 @@ public class RidePurposeFragment extends AbstractHttpFragment {
 
     @Override
     public void onRequestComplete(int request_id, BaseData baseData) {
-
-        BookRide res = new JacksonParser<BookRide>(baseData.responseData).parse(request_id);
-        if(res.getStatus() == "OK"){
+        Log.e("Ansh","onRequestComplete : "+baseData.responseData+"");
+        BookRide res = new JacksonParser<BookRide>(baseData.responseData).parse(baseData.request_code);
+        if(res.getStatus().equalsIgnoreCase("OK")){
             showBookingSuccessDialog();
         }
     }
@@ -87,8 +88,11 @@ public class RidePurposeFragment extends AbstractHttpFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.dismiss();
+                getActivity().getFragmentManager().beginTransaction().detach(RidePurposeFragment.this).commit();
             }
         });
+       AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     @Override
